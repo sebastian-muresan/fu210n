@@ -1,0 +1,104 @@
+<h2 mat-dialog-title>Adauga proiect</h2>
+
+
+<mat-dialog-content>
+
+    <form class="example-form">
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Zona</mat-label>
+                    <input matInput [(ngModel)]="data.materialZoneName" [ngModelOptions]="{standalone: true}" readonly>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Denumire</mat-label>
+                    <input matInput [(ngModel)]="data.materialName" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Producator</mat-label>
+                    <input matInput [(ngModel)]="data.materialManufacturer" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Code</mat-label>
+                    <input matInput [(ngModel)]="data.materialCode" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Descriere</mat-label>
+                    <input matInput [(ngModel)]="data.materialDescription" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Amplasare</mat-label>
+                    <input matInput [(ngModel)]="data.materialPlace" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Link</mat-label>
+                    <input matInput [(ngModel)]="data.materialLink" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Imagine</mat-label>
+                    <input matInput [(ngModel)]="data.materialImage" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Cantitate</mat-label>
+                    <input matInput [(ngModel)]="data.materialQuantity" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>U.m.</mat-label>
+                    <input matInput [(ngModel)]="data.materialUom" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Pret / u.m.</mat-label>
+                    <input matInput [(ngModel)]="data.materialPricePerUom" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close [mat-dialog-close]='data' color="primary">Adauga</button>
+    <button mat-button mat-dialog-close mat-dialog-close='false'>Anulare</button>
+</mat-dialog-actions>

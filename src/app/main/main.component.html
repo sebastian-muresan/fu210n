@@ -1,0 +1,49 @@
+<mat-sidenav-container class="sidenav-container">
+
+    <mat-sidenav #drawer class="sidenav" fixedInViewport="false" [ngClass]="{hidden: !(isHandset$ | async)}"
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="!(isHandset$ | async)">
+        <mat-toolbar>Menu</mat-toolbar>
+        <mat-nav-list *ngIf="isLoggedIn$ | async as isLoggedIn">
+            <a mat-list-item (click)="drawer.toggle();" routerLink="/my-projects"
+                routerLinkActive="mat-button-toggle-checked">Proiecte</a>
+            <a mat-list-item (click)="drawer.toggle();" routerLink="/materials"
+                routerLinkActive="mat-button-toggle-checked">Materiale</a>
+            <a mat-list-item (click)="drawer.toggle();" routerLink="/providers"
+                routerLinkActive="mat-button-toggle-checked">Furnizori</a>
+            <a mat-list-item (click)="drawer.toggle();" routerLink="/clients"
+                routerLinkActive="mat-button-toggle-checked">Clienti</a>
+            <a mat-list-item (click)="drawer.toggle();" routerLink="/my-profile"
+                routerLinkActive="mat-button-toggle-checked">Contul
+                Meu</a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+                *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span>ProView</span>
+
+            <span class="spacer"></span>
+            <div *ngIf="(isHandset$ | async) == false">
+                <a mat-button routerLink="/my-projects" routerLinkActive="mat-button-toggle-checked"> Proiecte </a>
+                <!--<a mat-button routerLink="/materials" routerLinkActive="mat-button-toggle-checked">Materiale</a>
+                <a mat-button routerLink="/providers" routerLinkActive="mat-button-toggle-checked">Furnizori</a>-->
+                <a mat-button routerLink="/clients" routerLinkActive="mat-button-toggle-checked">Clienti</a>
+                <a mat-button [routerLink]="'/my-profile'" routerLinkActive="mat-button-toggle-checked">
+                    <mat-icon aria-label="Side nav toggle icon">account_circle</mat-icon>
+                </a>
+                <a mat-button (click)="onLogout()">
+                    <mat-icon aria-label="Side nav toggle icon">power_settings_new</mat-icon>
+                </a>
+            </div>
+
+        </mat-toolbar>
+        <main [@routeAnimations]="prepareRoute(outlet)" class="content">
+            <router-outlet #outlet="outlet"></router-outlet>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,97 @@
+<h2 mat-dialog-title>Adauga proiect</h2>
+
+
+<mat-dialog-content>
+
+    <form class="example-form">
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Nume Proiect</mat-label>
+                    <input matInput [(ngModel)]="data.projectName" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Descriere</mat-label>
+                    <input matInput [(ngModel)]="data.projectDescription" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>
+        <!--
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Adresa E-Mail</mat-label>
+                    <input matInput [(ngModel)]="data.email" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Telefon</mat-label>
+                    <input matInput [(ngModel)]="data.phoneNr" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Oras</mat-label>
+                    <input matInput [(ngModel)]="data.city" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Adresa</mat-label>
+                    <input matInput [(ngModel)]="data.address" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Data incepere</mat-label>
+                    <input matInput [(ngModel)]="data.startDate" [ngModelOptions]="{standalone: true}"
+                        [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Data finalizare</mat-label>
+                    <input matInput [(ngModel)]="data.endDate" [ngModelOptions]="{standalone: true}"
+                        [matDatepicker]="picker1">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Buget</mat-label>
+                    <input matInput [(ngModel)]="data.budget" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+            </div>
+        </div>-->
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close [mat-dialog-close]='data' color="primary">Adauga</button>
+    <button mat-button mat-dialog-close mat-dialog-close='false'>Anulare</button>
+</mat-dialog-actions>

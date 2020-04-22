@@ -1,0 +1,62 @@
+<div class="mat-elevation-z8 data-table">
+  <mat-divider></mat-divider>
+  <mat-toolbar>
+    <span>Proiectele mele</span>
+  </mat-toolbar>
+  <mat-divider></mat-divider>
+
+
+  <table mat-table class="full-width-table" matSort aria-label="Elements" id="ExampleTable">
+
+    <!-- projectName -->
+    <ng-container matColumnDef="projectName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nume</th>
+      <td mat-cell *matCellDef="let row">{{row.projectName}}</td>
+    </ng-container>
+
+    <!-- projectDescription -->
+    <ng-container matColumnDef="projectDescription">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Descriere</th>
+      <td mat-cell *matCellDef="let row">{{row.projectDescription}}</td>
+    </ng-container>
+
+    <!-- 
+    <ng-container matColumnDef="startDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data inceput</th>
+      <td mat-cell *matCellDef="let row">{{formatDate(row.startDate)}}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="endDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data finalizare</th>
+      <td mat-cell *matCellDef="let row">{{formatDate(row.endDate)}}</td>
+    </ng-container>-->
+
+    <!-- projectDescription -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row" class="edit-cell">
+        <button mat-button (click)="displayProjectMaterials(row.idProject)">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="displayProjectMaterials(row.idProject)"></tr>
+  </table>
+
+  <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="50"
+    [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+  <mat-divider></mat-divider>
+
+  <section>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" (click)="openDialogToAddProject()">Adauga Proiect</button>
+    </div>
+  </section>
+
+  <mat-divider></mat-divider>
+
+</div>

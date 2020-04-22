@@ -1,0 +1,46 @@
+<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()" class="my-profile-form">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Date personale</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Nume" formControlName="fullName" readonly>
+            <mat-error *ngIf="addressForm.controls['fullName'].hasError('required')">
+              First name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Adresa E-Mail" formControlName="email" readonly>
+            <mat-error *ngIf="addressForm.controls['email'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Telefon" formControlName="phoneNr" readonly />
+            <mat-error *ngIf="addressForm.controls['phoneNr'].hasError('required')">
+              Address is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
