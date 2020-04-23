@@ -11,12 +11,12 @@ export interface ClientsTableItem {
 }
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: ClientsTableItem[] = [
+/*const EXAMPLE_DATA: ClientsTableItem[] = [
   { id: 1, name: 'Marius' },
   { id: 2, name: 'Sebastian' },
   { id: 3, name: 'Roxi' },
   { id: 4, name: 'Andrada' },
-];
+];*/
 
 /**
  * Data source for the ClientsTable view. This class should
@@ -24,12 +24,13 @@ const EXAMPLE_DATA: ClientsTableItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class ClientsTableDataSource extends DataSource<ClientsTableItem> {
-  data: ClientsTableItem[] = EXAMPLE_DATA;
+  data: ClientsTableItem[];
   paginator: MatPaginator;
   sort: MatSort;
 
-  constructor() {
+  constructor(private clients: ClientsTableItem[]) {
     super();
+    this.data = clients;
   }
 
   /**

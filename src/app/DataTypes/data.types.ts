@@ -30,8 +30,14 @@ export interface NewMaterialDialogData {
     materialPricePerUom: number,
     materialZoneName: string,
     materialZoneId: number
-
 }
+
+export interface NewClientDialogData {
+    clientName: string,
+    clientEmail: string,
+    clientPhoneNr: string
+}
+
 export interface NewZoneDialogData {
     newZoneName: string;
 }

@@ -60,7 +60,7 @@ export class ProjectMaterialsComponent implements AfterViewInit, OnInit {
 
     dialogRef.afterClosed().subscribe(
       result => {
-        if (result != 'false') {
+        if (result != false) {
           console.log(result);
           this.data.splice(this.data.length - 1, 0, this.getZoneLine(result, this.getMaxZoneId() + 1));
           this.dataSource = new ProjectMaterialsDataSource(this.data);
@@ -81,14 +81,14 @@ export class ProjectMaterialsComponent implements AfterViewInit, OnInit {
 
     dialogRef.afterClosed().subscribe(
       result => {
-        if (result != null) {
+        if (result != false) {
           let lastIndex = 0;
-          let indexFound = 'false';
+          let indexFound = false;
           for (let i = 0; i < this.data.length; i++) {
-            if (this.data[i].zoneId == zoneId && indexFound == 'false') {
-              indexFound = 'true';
+            if (this.data[i].zoneId == zoneId && indexFound == false) {
+              indexFound = true;
             }
-            if (indexFound == 'true' && this.data[i].zoneId != zoneId) {
+            if (indexFound == true && this.data[i].zoneId != zoneId) {
               lastIndex = i;
               break;
             }
@@ -116,6 +116,8 @@ export class ProjectMaterialsComponent implements AfterViewInit, OnInit {
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
           this.table.dataSource = this.dataSource;
+
+          this.initNewMaterial();
         }
       });
   }

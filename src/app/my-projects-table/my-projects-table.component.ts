@@ -36,7 +36,7 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
     if (this.data.length != 0) {
       this.dataSource = new MyProjectsTableDataSource(this.data);
     }
-    this.newProjectDialogData = this.initializeNewProjectDialog();
+    this.initDialogData();
     this.displayedColumns = this.getColumnsToDisplay();
   }
 
@@ -60,8 +60,9 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe(
       result => {
         console.log(result);
-        if (result != 'false') {
+        if (result != false) {
           this.addProjectToList(result);
+          this.initDialogData();
         }
       });
   }
@@ -69,19 +70,7 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
   getColumnsToDisplay() {
     return ['projectName', 'projectDescription', 'actions'];
   }
-  initializeNewProjectDialog() {
-    return {
-      projectName: "",
-      projectDescription: ""
-      /* email: "",
-       phoneNr: "",
-       city: "",
-       address: "",
-       startDate: null,
-       endDate: null,
-       budget: 0,*/
-    };
-  }
+
   getNextIdProiect() {
     return 0;
   }
@@ -91,9 +80,6 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
       idProject: this.getNextIdProiect(),
       projectName: result.projectName,
       projectDescription: result.projectDescription
-      /* clientName: result.clientName,
-       startDate: result.startDate,
-       endDate: result.endDate*/
     });
     this.dataSource = new MyProjectsTableDataSource(this.data);
     this.dataSource.sort = this.sort;
@@ -113,6 +99,13 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
       day = '0' + day;
 
     return [day, month, year].join(' / ');
+  }
+
+  initDialogData() {
+    this.newProjectDialogData = {
+      projectDescription: "",
+      projectName: ""
+    }
   }
 
 }

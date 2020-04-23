@@ -42,6 +42,7 @@ import { AddProjectDialogComponent } from './add-project-dialog/add-project-dial
 import { MyProjectsService } from './services/my-projects.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AddMaterialDialogComponent } from './add-material-dialog/add-material-dialog.component';
+import { AddClientDialogComponent } from './add-client-dialog/add-client-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,8 @@ import { AddMaterialDialogComponent } from './add-material-dialog/add-material-d
     ProjectMaterialsComponent,
     AddZoneDialogComponent,
     AddProjectDialogComponent,
-    AddMaterialDialogComponent
+    AddMaterialDialogComponent,
+    AddClientDialogComponent
   ], entryComponents: [AddZoneDialogComponent, AddProjectDialogComponent],
   imports: [
     BrowserModule,

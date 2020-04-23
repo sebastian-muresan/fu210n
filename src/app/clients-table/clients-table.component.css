@@ -1,3 +1,9 @@
 .full-width-table {
   width: 100%;
 }
+
+
+section {
+  display: table;
+  margin: 8px;
+}
