@@ -13,12 +13,14 @@ import { LoginService } from '../services/login/login.service';
 export class LoginComponent {
   constructor(private router: Router, private loginService: LoginService) { }
   form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
+    userEmail: new FormControl(''),
+    userPassword: new FormControl(''),
   });
 
   submit() {
-    this.loginService.login();
+    console.log('userEmail : ' + this.form.get('userEmail').value);
+    console.log('userPassword : ' + this.form.get('userPassword').value);
+    this.loginService.login({ userEmail: this.form.get('userEmail').value, userPassword: this.form.get('userPassword').value });
   }
   @Input() error: string | null;
 

@@ -38,6 +38,7 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
     }
     this.initDialogData();
     this.displayedColumns = this.getColumnsToDisplay();
+
   }
 
   ngAfterViewInit() {

@@ -43,6 +43,7 @@ import { MyProjectsService } from './services/my-projects.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AddMaterialDialogComponent } from './add-material-dialog/add-material-dialog.component';
 import { AddClientDialogComponent } from './add-client-dialog/add-client-dialog.component';
+import { httpInterceptProviders } from './http-interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,19 +71,14 @@ import { AddClientDialogComponent } from './add-client-dialog/add-client-dialog.
     FormsModule,
     FlexLayoutModule,
     MatTabsModule,
-    MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
-    MatFormFieldModule,
     MatButtonModule,
-    MatCheckboxModule,
-    MatIconModule,
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,
     MatTableModule,
     MatListModule,
-    //   HttpClientModule,
     MatPaginatorModule,
     MatSortModule,
     MatSelectModule,
@@ -95,7 +91,7 @@ import { AddClientDialogComponent } from './add-client-dialog/add-client-dialog.
     MatDialogModule,
     MatTooltipModule
   ],
-  providers: [LoginService, MyProjectsService],
+  providers: [LoginService, MyProjectsService, httpInterceptProviders],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

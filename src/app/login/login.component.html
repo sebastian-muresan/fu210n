@@ -4,21 +4,16 @@
         <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
             <mat-tab label="Log In">
                 <mat-card-content>
-                    <form (submit)="submit()">
+                    <form (submit)="submit()" [formGroup]="form">
                         <mat-form-field>
-                            <input matInput placeholder="Email" required name="email" ngModel #email="ngModel">
-                            <mat-error *ngIf="email.invalid">Email is required</mat-error>
+                            <input matInput placeholder="Email" formControlName="userEmail">
+
                             <mat-icon matSuffix>email</mat-icon>
                         </mat-form-field>
                         <mat-form-field>
-                            <input matInput placeholder="Password" type="password" required minlength="6"
-                                name="password" ngModel #password="ngModel">
-                            <mat-error *ngIf="password.errors && password.errors.required">
-                                Password is required
-                            </mat-error>
-                            <mat-error *ngIf="password.errors && password.errors.minlength">
-                                Password must be of length 6
-                            </mat-error>
+                            <input matInput placeholder="Password" formControlName="userPassword" required
+                                minlength="6">
+
                             <mat-icon matSuffix>lock</mat-icon>
                         </mat-form-field>
                         <!--<mat-checkbox>Remember Me!</mat-checkbox>-->
@@ -30,7 +25,7 @@
             </mat-tab>
             <mat-tab label="Sign Up">
                 <mat-card-content>
-                    <form (submit)="submit()">
+                    <!--<form (submit)="submit()">
                         <mat-form-field>
                             <input matInput placeholder="User Name" required name="username" ngModel
                                 #username="ngModel">
@@ -68,7 +63,7 @@
                         <button mat-raised-button color="primary" class="login-button">
                             Sign Up
                         </button>
-                    </form>
+                    </form>-->
                 </mat-card-content>
             </mat-tab>
         </mat-tab-group>
