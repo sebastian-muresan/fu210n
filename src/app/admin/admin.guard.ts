@@ -7,16 +7,16 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
-  constructor(private authService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) { }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    return this.authService.isLoggedIn.pipe(tap(isLoggedIn => {
-      if (!isLoggedIn) {
-        this.router.navigate(['/login']);
-      }
-    }));
+    const currentUser = this.loginService.currentUserValue;
+    if (currentUser) {
+      return true;
+    }
+    this.router.navigate(['/login']);
+    return false;
 
   }
 }

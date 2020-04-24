@@ -13,16 +13,16 @@ import { slider } from '../route-animations'
 })
 export class MainComponent implements OnInit {
 
-
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
   isLoggedIn$: Observable<boolean>;
-
+  currentUser;
   constructor(private breakpointObserver: BreakpointObserver, private loginService: LoginService) {
     this.loginService = loginService;
+    this.loginService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit() {

@@ -25,7 +25,7 @@
                 *ngIf="isHandset$ | async">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
-            <span>ProView</span>
+            <span>Hello {{this.currentUser.userName}} !</span>
 
             <span class="spacer"></span>
             <div *ngIf="(isHandset$ | async) == false">

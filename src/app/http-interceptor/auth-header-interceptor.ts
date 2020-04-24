@@ -11,7 +11,7 @@ export class AuthHeaderInterceptor implements HttpInterceptor {
         console.log(req.url);
         const authToken = "My Auth Token asdf";
         const authReq = req.clone({ setHeaders: { Authorization: authToken } });
-        return next.handle(authReq);
+        return next.handle(req);
     }
 
 }
