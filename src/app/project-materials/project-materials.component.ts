@@ -12,6 +12,9 @@ import { PdfUtil } from '../utils/tableUtils';
 import { ProjectMaterialsItem, NewMaterialDialogData } from '../DataTypes/data.types';
 import { AddMaterialDialogComponent } from '../add-material-dialog/add-material-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MyProjectsService } from '../services/my-projects.service';
+import { first } from 'rxjs/operators';
+import { MaterialsTableComponent } from '../materials-table/materials-table.component';
 @Component({
   selector: 'app-project-materials',
   templateUrl: './project-materials.component.html',
@@ -29,24 +32,68 @@ export class ProjectMaterialsComponent implements AfterViewInit, OnInit {
   newMaterial: NewMaterialDialogData;
   displayedColumnsMaterial;
   selectedFile;
+  zones = [];
 
-  constructor(private _route: ActivatedRoute, private _router: Router, private _dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  constructor(private _route: ActivatedRoute, private _router: Router, private _dialog: MatDialog, private _snackBar: MatSnackBar, private _projectsService: MyProjectsService) { }
 
   ngOnInit() {
-    this.data.push(this.getTotalLine());
-    this.dataSource = new ProjectMaterialsDataSource(this.data);
     this._route.params.subscribe((value) => {
       console.log(value.id);
+      this.loadData(value.id);
     });
     this.displayedColumnsMaterial = this.getDisplayColumns();
     this.initNewMaterial();
-
   }
 
+  loadData(projectId) {
+    this.data = [];
+    let materials;
+
+    this._projectsService.getProjectMaterials(projectId).pipe(first()).subscribe(data => {
+      materials = JSON.parse(JSON.stringify(data));
+      for (let i = 0; i < materials.length; i++) {
+        let material = materials[i];
+        if (this.searchZone(material.idZone) == false) {
+          this.data.push(this.getZoneLine(material.zoneName, material.idZone));
+          this.zones.push(material.idZone);
+        }
+        if (material.idMaterial != null) {
+          this.data.push({
+            id: material.idMaterial,
+            manufacturer: material.materialManufacturer,
+            name: material.materialName,
+            code: material.materialCode,
+            description: material.materialDescription,
+            place: material.materialApplication,
+            link: material.materialLink,
+            image: material.materialImage,
+            quantity: material.materialQuantity,
+            uom: material.materialUom,
+            price: material.materialPricePerUom,
+            total_price: material.materialPricePerUom * material.materialQuantity,
+            zoneId: material.materialZoneId,
+            isZone: false,
+            isTotal: false
+          });
+        }
+      }
+      this.data.push(this.getTotalLine());
+      this.dataSource = new ProjectMaterialsDataSource(this.data);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.table.dataSource = this.dataSource;
+    });
+
+  }
+  searchZone(zone) {
+    for (let i = 0; i < this.zones.length; i++) {
+      if (zone[i] == zone) {
+        return true;
+      }
+    }
+    return false;
+  }
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
   }
 
   back() {

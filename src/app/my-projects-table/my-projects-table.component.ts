@@ -11,6 +11,7 @@ import { AddProjectDialogComponent } from '../add-project-dialog/add-project-dia
 import { NewProjectDialogData } from '../DataTypes/data.types';
 import { MyProjectsService } from '../services/my-projects.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'my-projects-table',
@@ -30,24 +31,46 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
   newProjectDialogData: NewProjectDialogData;
   displayedColumns;
 
+  projects: any[];
+
   constructor(private _router: Router, private _dialog: MatDialog, private _myProjectService: MyProjectsService, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.data = this._myProjectService.getProjects();
-    if (this.data.length != 0) {
-      this.dataSource = new MyProjectsTableDataSource(this.data);
-    }
+
+    this.loadProjects();
     this.initDialogData();
     this.displayedColumns = this.getColumnsToDisplay();
 
   }
 
+  loadProjects() {
+    this.data = [];
+    this._myProjectService.getProjects().pipe(first()).subscribe(
+      projects => {
+        this.projects = JSON.parse(JSON.stringify(projects));
+        for (let i = 0; i < this.projects.length; i++) {
+          let project = this.projects[i];
+          console.log(project);
+          this.data.push({
+            idProject: project.idProject,
+            projectName: project.projectName,
+            projectDescription: project.projectDescription
+          });
+          if (this.data.length != 0) {
+            this.dataSource = new MyProjectsTableDataSource(this.data);
+            this.dataSource.sort = this.sort;
+            this.dataSource.paginator = this.paginator;
+            this.table.dataSource = this.dataSource;
+          }
+        }
+      },
+      error => {
+
+      }
+    );
+  }
   ngAfterViewInit() {
-    if (this.data.length != 0) {
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-      this.table.dataSource = this.dataSource;
-    }
+
   }
   displayProjectMaterials(idProject) {
     this._router.navigate(['/projectMaterials', idProject]);
@@ -77,8 +100,12 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
     return 0;
   }
 
-  addProjectToList(result) {
-    this.data.push({
+  addProjectToList(project) {
+    this._myProjectService.addProject(project).pipe(first()).subscribe(result => {
+      this.loadProjects();
+      this._snackBar.open('Proiect salvat cu succes !', null, { duration: 2000 });
+    });
+    /*this.data.push({
       idProject: this.getNextIdProiect(),
       projectName: result.projectName,
       projectDescription: result.projectDescription
@@ -86,8 +113,8 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
     this.dataSource = new MyProjectsTableDataSource(this.data);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
-    this._snackBar.open('Proiect salvat cu succes !', null, { duration: 2000 });
+    this.table.dataSource = this.dataSource;*/
+
   }
 
   formatDate(date) {

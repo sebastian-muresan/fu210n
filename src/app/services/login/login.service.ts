@@ -17,7 +17,8 @@ export class LoginService {
   public currentUserSubject: BehaviorSubject<any>;
 
   constructor(private router: Router, private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<any>(localStorage.getItem('currentUser'));
+    this.currentUserSubject = new BehaviorSubject<any>(null);
+    //localStorage.getItem('currentUser')
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -31,16 +32,17 @@ export class LoginService {
 
   login(userEmail, userPassword) {
     return this.http.post(this.apiUrl + '/users/login', { userEmail, userPassword }).pipe(map(user => {
+      //sessionStorage.setItem('currentUser', JSON.stringify(user));
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.currentUserSubject.next(user);
       this.loggedIn.next(true);
-
       return user;
 
     }));
   }
 
   logout() {
+    // sessionStorage.removeItem('currentUser');
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     this.loggedIn.next(false);
