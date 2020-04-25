@@ -28,7 +28,7 @@
 
 
 .my-profile-form{
-  width: 60%;
+  width: 100%;
   margin:20px auto; 
 }
 
@@ -47,4 +47,9 @@
   width: 80% !important;
 
 }
+}
+
+.my-profile-container{
+  width: 60%;
+  margin:20px auto; 
 }

@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddProjectDialogComponent } from '../add-project-dialog/add-project-dialog.component';
 import { NewProjectDialogData } from '../DataTypes/data.types';
 import { MyProjectsService } from '../services/my-projects.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'my-projects-table',
@@ -29,10 +30,10 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
   newProjectDialogData: NewProjectDialogData;
   displayedColumns;
 
-  constructor(private router: Router, private dialog: MatDialog, private myProjectService: MyProjectsService) { }
+  constructor(private _router: Router, private _dialog: MatDialog, private _myProjectService: MyProjectsService, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.data = this.myProjectService.getProjects();
+    this.data = this._myProjectService.getProjects();
     if (this.data.length != 0) {
       this.dataSource = new MyProjectsTableDataSource(this.data);
     }
@@ -49,11 +50,11 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
     }
   }
   displayProjectMaterials(idProject) {
-    this.router.navigate(['/projectMaterials', idProject]);
+    this._router.navigate(['/projectMaterials', idProject]);
   }
 
   openDialogToAddProject() {
-    let dialogRef = this.dialog.open(AddProjectDialogComponent, {
+    let dialogRef = this._dialog.open(AddProjectDialogComponent, {
       width: '50%',
       data: this.newProjectDialogData
     });
@@ -86,6 +87,7 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+    this._snackBar.open('Proiect salvat cu succes !', null, { duration: 2000 });
   }
 
   formatDate(date) {

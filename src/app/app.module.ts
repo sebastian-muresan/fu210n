@@ -44,6 +44,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { AddMaterialDialogComponent } from './add-material-dialog/add-material-dialog.component';
 import { AddClientDialogComponent } from './add-client-dialog/add-client-dialog.component';
 import { httpInterceptProviders } from './http-interceptor';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +90,8 @@ import { httpInterceptProviders } from './http-interceptor';
     MatTreeModule,
     MatExpansionModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule
   ],
   providers: [LoginService, MyProjectsService, httpInterceptProviders],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

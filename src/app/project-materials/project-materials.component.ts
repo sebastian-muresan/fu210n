@@ -11,6 +11,7 @@ import { TableUtil } from '../utils/tableUtils';
 import { PdfUtil } from '../utils/tableUtils';
 import { ProjectMaterialsItem, NewMaterialDialogData } from '../DataTypes/data.types';
 import { AddMaterialDialogComponent } from '../add-material-dialog/add-material-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-project-materials',
   templateUrl: './project-materials.component.html',
@@ -29,12 +30,12 @@ export class ProjectMaterialsComponent implements AfterViewInit, OnInit {
   displayedColumnsMaterial;
   selectedFile;
 
-  constructor(private route: ActivatedRoute, private router: Router, private cdr: ChangeDetectorRef, private dialog: MatDialog) { }
+  constructor(private _route: ActivatedRoute, private _router: Router, private _dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.data.push(this.getTotalLine());
     this.dataSource = new ProjectMaterialsDataSource(this.data);
-    this.route.params.subscribe((value) => {
+    this._route.params.subscribe((value) => {
       console.log(value.id);
     });
     this.displayedColumnsMaterial = this.getDisplayColumns();
@@ -49,11 +50,11 @@ export class ProjectMaterialsComponent implements AfterViewInit, OnInit {
   }
 
   back() {
-    this.router.navigate(['my-projects']);
+    this._router.navigate(['my-projects']);
   }
 
   addZone() {
-    let dialogRef = this.dialog.open(AddZoneDialogComponent, {
+    let dialogRef = this._dialog.open(AddZoneDialogComponent, {
       width: '250px',
       data: { newZoneName: this.newZoneName }
     });
@@ -67,6 +68,7 @@ export class ProjectMaterialsComponent implements AfterViewInit, OnInit {
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
           this.table.dataSource = this.dataSource;
+          this._snackBar.open('Zona adaugata cu succes !', null, { duration: 2000 });
         }
       }
     );
@@ -74,7 +76,7 @@ export class ProjectMaterialsComponent implements AfterViewInit, OnInit {
   addMaterialToZone(zoneId, zoneName) {
 
     this.newMaterial.materialZoneName = zoneName;
-    let dialogRef = this.dialog.open(AddMaterialDialogComponent, {
+    let dialogRef = this._dialog.open(AddMaterialDialogComponent, {
       width: '50%',
       data: this.newMaterial
     });
@@ -116,8 +118,8 @@ export class ProjectMaterialsComponent implements AfterViewInit, OnInit {
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
           this.table.dataSource = this.dataSource;
-
           this.initNewMaterial();
+          this._snackBar.open('Material adaugat cu succes !', null, { duration: 2000 });
         }
       });
   }
