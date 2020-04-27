@@ -12,16 +12,12 @@
 
 
   <div class="table-header">
+    <mat-spinner *ngIf="loadingIndicator" class="loading-spinner"></mat-spinner>
     <div class="left-header">
       <h2>Descriere</h2>
-      <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.</span>
-
+      <p>{{projectDescription}}</p>
       <h2>Client</h2>
-      <span>Andrada Tibre</span>
+      <p>Andrada Tibre</p>
     </div>
     <div class="right-header">
       <h2>Documente</h2>
@@ -107,6 +103,8 @@
     </div>
   </div>
   <mat-divider></mat-divider>
+
+  <mat-spinner *ngIf="loadingIndicator" class="loading-spinner"></mat-spinner>
   <table mat-table class="full-width-table" matSort aria-label="Elements" id="materialsTable">
     <!-- Id Column -->
 

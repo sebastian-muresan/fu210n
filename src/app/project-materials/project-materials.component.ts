@@ -33,10 +33,12 @@ export class ProjectMaterialsComponent implements AfterViewInit, OnInit {
   displayedColumnsMaterial;
   selectedFile;
   zones = [];
-
+  loadingIndicator;
+  projectDescription = "";
   constructor(private _route: ActivatedRoute, private _router: Router, private _dialog: MatDialog, private _snackBar: MatSnackBar, private _projectsService: MyProjectsService) { }
 
   ngOnInit() {
+    this.loadingIndicator = true;
     this._route.params.subscribe((value) => {
       console.log(value.id);
       this.loadData(value.id);
@@ -56,6 +58,10 @@ export class ProjectMaterialsComponent implements AfterViewInit, OnInit {
         if (this.searchZone(material.idZone) == false) {
           this.data.push(this.getZoneLine(material.zoneName, material.idZone));
           this.zones.push(material.idZone);
+        }
+
+        if (i == 0) {
+          this.projectDescription = material.projectDescription;
         }
         if (material.idMaterial != null) {
           this.data.push({
@@ -82,6 +88,7 @@ export class ProjectMaterialsComponent implements AfterViewInit, OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.table.dataSource = this.dataSource;
+      this.loadingIndicator = false;
     });
 
   }

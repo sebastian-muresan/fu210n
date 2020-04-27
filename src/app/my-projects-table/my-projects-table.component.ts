@@ -32,11 +32,11 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
   displayedColumns;
 
   projects: any[];
-
+  loadingIndicator;
   constructor(private _router: Router, private _dialog: MatDialog, private _myProjectService: MyProjectsService, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
-
+    this.loadingIndicator = true;
     this.loadProjects();
     this.initDialogData();
     this.displayedColumns = this.getColumnsToDisplay();
@@ -63,6 +63,7 @@ export class MyProjectsTableComponent implements AfterViewInit, OnInit {
             this.table.dataSource = this.dataSource;
           }
         }
+        this.loadingIndicator = false;
       },
       error => {
 
